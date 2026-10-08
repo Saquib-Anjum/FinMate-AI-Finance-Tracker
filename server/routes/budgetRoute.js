@@ -1,0 +1,10 @@
+import {Router} from 'express';
+import { protect } from '../middlewares/auth.js';
+import { createBudget, deleteBudget, getBudgetId, getBudgets, updateBudget } from '../controllers/budgetController.js';
+const budgetRouter = Router();
+budgetRouter.post('/create',protect,createBudget);
+budgetRouter.get('/get',protect,getBudgets);
+budgetRouter.get('/get/:id',protect,getBudgetId);
+budgetRouter.put('/update/:id',protect,updateBudget);
+budgetRouter.delete('/delete/:id',protect,deleteBudget);
+export default budgetRouter;
