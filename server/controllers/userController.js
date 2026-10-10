@@ -33,6 +33,11 @@ const login = async (req, res) => {
       success: true,
       message: "You are Loggedin ...",
       token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
   } catch (err) {
     res.status(500).json({
@@ -65,11 +70,10 @@ const signup = async (req, res) => {
       password: hash,
     });
     const profile = await profileModel.create({
-      userId:user._id
-    })
+      userId: user._id,
+    });
     const token = generateToken({
       userId: user._id,
-    
     });
     res.json({
       success: true,
@@ -83,4 +87,32 @@ const signup = async (req, res) => {
     });
   }
 };
-export { login, signup };
+
+const getMe = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Failed to authorized",
+      });
+    }
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    res.json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+export { login, signup, getMe };
