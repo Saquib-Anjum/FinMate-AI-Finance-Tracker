@@ -15,7 +15,7 @@ function ProfileCard({ user, profile, avatarPreview, onAvatarChange }) {
 
   return (
     <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <div className="h-24 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-400" />
+      <div className="h-24 bg-gradient-to-r from-purple-600 via-teal-500 to-rose-100" />
 
       <div className="px-5 pb-6 sm:px-6">
         <div className="-mt-12 flex items-end justify-between">

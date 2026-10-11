@@ -342,7 +342,7 @@ Rules:
     ];
 
     // Limit model/tool interaction rounds.
-    for (let round = 0; round < 5; round++) {
+    for (let round = 0; round < 2; round++) {
       const completion = await groq.chat.completions.create({
         model: process.env.GROQ_MODEL,
         messages,
