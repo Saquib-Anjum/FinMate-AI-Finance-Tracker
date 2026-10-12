@@ -16,7 +16,18 @@ const app = express();
 // middleware
 app.use(express.json());
 app.use(cors());
-connectDB();
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error("Database unavailable:", err.message);
+    res.status(503).json({
+      success: false,
+      message: "Database temporarily unavailable",
+    });
+  }
+});
 //routes
 app.use("/api/auth", userRouter);
 app.use("/api/transactions", transactionsRouter);
