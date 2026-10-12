@@ -10,6 +10,7 @@ import dashboardRouter from './routes/dashboardRoute.js'
 import profileRouter from "./routes/profileRoute.js";
 import aiRouter from "./routes/aiAssistantRoute.js";
 import analyticsRouter from  './routes/analyticsRoute.js'
+import accountRouter from "./routes/accountRoute.js";
 const app = express();
 // middleware
 app.use(express.json());
@@ -23,9 +24,8 @@ app.use("/api/goal", goalRouter);
 app.use('/api/profile',profileRouter)
 app.use("/api/dashboard", dashboardRouter);
 app.use('/api/ai',aiRouter);
-app.use('/api/analytics',analyticsRouter
-
-)
+app.use('/api/analytics',analyticsRouter);
+app.use('/api/account',accountRouter);
 app.use("/", (req, res) => {
   res.json({
     message: "server is running",
