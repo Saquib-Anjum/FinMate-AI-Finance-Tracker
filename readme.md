@@ -8,7 +8,6 @@
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Groq](https://img.shields.io/badge/AI-Groq-F55036?style=for-the-badge)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Aggregation-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 </div>
 
@@ -21,7 +20,7 @@ FinMate is a full-stack personal finance tracker that lets you record income and
 🔗 **Live Backend:** https://fin-mate-ai-finance-tracker-backend.vercel.app
 
 <!-- 📸 Add a banner or demo GIF here -->
-<!-- ![FinMate Banner](./docs/banner.png) -->
+<!-- ![FinMate Banner](./assets/banner.png) -->
 
 ---
 
@@ -37,47 +36,17 @@ FinMate is a full-stack personal finance tracker that lets you record income and
 - 💡 **Smart insights** – AI-generated tips and summaries
 - 📱 **Responsive UI** – desktop, tablet, and mobile
 
-> ⚠️ Edit this list to match what you have actually built.
-
 ---
 
 ## 🏗️ Architecture
 
 ### System Architecture
 
-<!-- 👇 Replace with your architecture diagram -->
-![System Architecture](./docs/architecture.png)
+![System Architecture](./assets/eintireArch.png)
 
-### AI Chat Architecture
+### AI Chat Flow
 
-<!-- 👇 Replace with your chat flow diagram -->
-![AI Chat Architecture](./docs/chat-architecture.png)
-
-
-
-**AI chat flow:**
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant C as Client
-    participant S as Server
-    participant D as Database
-    participant G as Groq (LLM)
-
-    U->>C: "How much did I spend on food last month?"
-    C->>S: POST /api/chat (JWT)
-    S->>G: User message + tool definitions
-    G-->>S: tool_call: getSpendingByCategory({category, range})
-    S->>D: Run aggregation pipeline (scoped to userId)
-    D-->>S: Aggregated result
-    S->>G: Tool result
-    G-->>S: Natural-language answer
-    S-->>C: Reply
-    C-->>U: Show answer
-```
-
-</details>
+![AI Chat Flow](./assets/ai%20flow.png)
 
 ---
 
@@ -91,8 +60,6 @@ FinMate does not send your raw data to the LLM. It uses **function calling** so 
 4. The server validates the arguments and builds a **MongoDB aggregation pipeline**, always scoped to the logged-in `userId`.
 5. The result is sent back to Groq as a tool message, and the model writes the final answer.
 
-
-
 **Why this design**
 
 - ✅ Answers are computed from real data, not guessed by the model
@@ -103,8 +70,6 @@ FinMate does not send your raw data to the LLM. It uses **function calling** so 
 ---
 
 ## 🛠️ Tech Stack
-
-> ⚠️ Confirm against your `package.json` files.
 
 | Layer        | Technologies                                   |
 | ------------ | ---------------------------------------------- |
@@ -123,7 +88,7 @@ FinMate does not send your raw data to the LLM. It uses **function calling** so 
 FinMate-AI-Finance-Tracker/
 ├── client/          # Frontend app
 ├── server/          # Backend API
-├── docs/            # Architecture diagrams & screenshots
+├── assets/          # Architecture diagrams & screenshots
 └── README.md
 ```
 
@@ -221,34 +186,32 @@ App runs at `http://localhost:5173`.
 
 ## 🔌 API Reference
 
-> ⚠️ Replace these with your actual routes (paste them to me and I'll fill this in).
-
 ### Auth
 
-| Method | Endpoint                      | Description                   |
-| ------ | ----------------------------- | ----------------------------- |
-| POST   | `/api/auth/signup`          | Register with email/password  |
-| POST   | `/api/auth/login`             | Log in                        |
-| GET    | `/api/auth/google`            | Start Google OAuth            |
-| GET    | `/api/auth/google/callback`   | Google OAuth callback         |
-| GET    | `/api/auth/github`            | Start GitHub OAuth            |
-| GET    | `/api/auth/github/callback`   | GitHub OAuth callback         |
+| Method | Endpoint                    | Description                  |
+| ------ | --------------------------- | ---------------------------- |
+| POST   | `/api/auth/signup`          | Register with email/password |
+| POST   | `/api/auth/login`           | Log in                       |
+| GET    | `/api/auth/google`          | Start Google OAuth           |
+| GET    | `/api/auth/google/callback` | Google OAuth callback        |
+| GET    | `/api/auth/github`          | Start GitHub OAuth           |
+| GET    | `/api/auth/github/callback` | GitHub OAuth callback        |
 
 ### Transactions
 
-| Method | Endpoint                 | Description               |
-| ------ | ------------------------ | ------------------------- |
-| GET    | `/api/transactions`      | List transactions         |
-| POST   | `/api/transactions`      | Create a transaction      |
-| PUT    | `/api/transactions/:id`  | Update a transaction      |
-| DELETE | `/api/transactions/:id`  | Delete a transaction      |
+| Method | Endpoint                | Description          |
+| ------ | ----------------------- | -------------------- |
+| GET    | `/api/transactions`     | List transactions    |
+| POST   | `/api/transactions`     | Create a transaction |
+| PUT    | `/api/transactions/:id` | Update a transaction |
+| DELETE | `/api/transactions/:id` | Delete a transaction |
 
 ### AI
 
-| Method | Endpoint             | Description                        |
-| ------ | -------------------- | ---------------------------------- |
-| POST   | `/api/chat`          | Chat with the Groq finance assistant |
-| POST   | `/api/ai/`           | Get AI spending insights           |
+| Method | Endpoint     | Description                          |
+| ------ | ------------ | ------------------------------------ |
+| POST   | `/api/chat`  | Chat with the Groq finance assistant |
+| POST   | `/api/ai/`   | Get AI spending insights             |
 
 ---
 
@@ -256,7 +219,7 @@ App runs at `http://localhost:5173`.
 
 | Dashboard | Transactions | AI Chat |
 | :-------: | :----------: | :-----: |
-| ![Dashboard](./docs/dashboard.png) | ![Transactions](./docs/transactions.png) | ![Chat](./docs/chat.png) |
+| ![Dashboard](./assets/dashboard.png) | ![Transactions](./assets/transactions.png) | ![Chat](./assets/chat.png) |
 
 ---
 
@@ -283,7 +246,6 @@ App runs at `http://localhost:5173`.
 5. Open a Pull Request
 
 ---
-
 
 ## 👤 Author
 
