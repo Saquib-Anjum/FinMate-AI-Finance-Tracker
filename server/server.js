@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv/config";
+import "dotenv/config";
 import userRouter from "./routes/userRouter.js";
 import connectDB from "./config/db.js";
 import transactionsRouter from "./routes/transactionsRoute.js";
@@ -12,23 +12,15 @@ import aiRouter from "./routes/aiAssistantRoute.js";
 import analyticsRouter from "./routes/analyticsRoute.js";
 import accountRouter from "./routes/accountRoute.js";
 import settingsRouter from "./routes/settingRout.js";
+
 const app = express();
+const PORT = process.env.PORT || 5000;
+
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (err) {
-    console.error("Database unavailable:", err.message);
-    res.status(503).json({
-      success: false,
-      message: "Database temporarily unavailable",
-    });
-  }
-});
-//routes
+
+// routes
 app.use("/api/auth", userRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/budget", budgetRouter);
@@ -38,15 +30,22 @@ app.use("/api/dashboard", dashboardRouter);
 app.use("/api/ai", aiRouter);
 app.use("/api/analytics", analyticsRouter);
 app.use("/api/account", accountRouter);
-
 app.use("/api/settings", settingsRouter);
+
 app.use("/", (req, res) => {
   res.json({
     message: "server is running",
   });
 });
-//listening app
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`server is running PORT: ${PORT}| http://localhost:${PORT}`);
-});
+
+// connect database and start server
+try {
+  await connectDB();
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`server is running PORT: ${PORT} | http://localhost:${PORT}`);
+  });
+} catch (err) {
+  console.error("Failed to start server:", err.message);
+  process.exit(1);
+}
