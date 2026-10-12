@@ -17,7 +17,7 @@
 
 FinMate is a full-stack personal finance tracker that lets you record income and expenses, visualize spending habits, and chat with an AI assistant powered by the **Groq SDK**. The assistant uses **function calling** to run **MongoDB aggregation pipelines** on your transactions, so its answers come from your real data.
 
-🔗 **Live Backend:** https://fin-mate-ai-finance-tracker-backend.vercel.app
+🔗 **Live Backend:** https://fin-mate-ai-finance-tracker.vercel.app/
 
 <!-- 📸 Add a banner or demo GIF here -->
 <!-- ![FinMate Banner](./assets/banner.png) -->
