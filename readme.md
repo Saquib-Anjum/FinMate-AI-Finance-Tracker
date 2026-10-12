@@ -4,7 +4,7 @@
 
 **Track your money. Understand your spending. Chat with your finances.**
 
-[![Live Backend](https://img.shields.io/badge/Backend-Live-success?style=for-the-badge&logo=vercel)](https://fin-mate-ai-finance-tracker-backend.vercel.app)
+[![Live Backend](https://img.shields.io/badge/Backend-Live-success?style=for-the-badge&logo=vercel)]()
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Groq](https://img.shields.io/badge/AI-Groq-F55036?style=for-the-badge)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Aggregation-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
