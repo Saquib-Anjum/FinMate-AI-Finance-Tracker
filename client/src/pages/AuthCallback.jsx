@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios.js";
 import { useAuth } from "../context/AuthContext.jsx";
-
+import Loading from '../components/Loading.jsx'
 const AuthCallback = () => {
   const started = useRef(false);
   const [error, setError] = useState("");
@@ -55,7 +55,7 @@ const AuthCallback = () => {
     return <p>Authentication failed: {error}</p>;
   }
 
-  return <p>Signing you in...</p>;
+  return <Loading/>;
 };
 
 export default AuthCallback;

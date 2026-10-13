@@ -1,8 +1,10 @@
 import { ArrowRight, Play } from "lucide-react";
-
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Hero = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <section id="home" className="overflow-hidden bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
@@ -28,7 +30,12 @@ const Hero = () => {
 
           {/* Buttons */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button className="flex items-center gap-2 rounded-full bg-green-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-green-600/20 transition hover:bg-green-700 active:scale-95">
+            <button
+              onClick={() =>
+                user ? navigate("/dashboard") : navigate("/signup")
+              }
+              className="flex items-center gap-2 rounded-full bg-green-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-green-600/20 transition hover:bg-green-700 active:scale-95"
+            >
               Get Started Free
               <ArrowRight size={17} />
             </button>
@@ -42,9 +49,27 @@ const Hero = () => {
           {/* Trust */}
           <div className="mt-8 flex items-center gap-4">
             <div className="flex -space-x-2">
-              <div className="h-9 w-9 rounded-full border-2 border-white bg-slate-200" />
-              <div className="h-9 w-9 rounded-full border-2 border-white bg-slate-300" />
-              <div className="h-9 w-9 rounded-full border-2 border-white bg-slate-400" />
+              <div className=" flex items-center justify-center">
+                <img
+                  className="w-7.5 rounded-full border-3 border-white -translate-x-4"
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50&h=50&auto=format&fit=crop"
+                  alt="userImage3"
+                />
+              </div>
+              <div className="flex items-center justify-center">
+                <img
+                  className="w-7.5 rounded-full border-3 border-white -translate-x-2"
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=50"
+                  alt="userImage2"
+                />
+              </div>
+              <div className=" flex items-center justify-center">
+                <img
+                  className="w-7.5 rounded-full border-3 border-white"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=50"
+                  alt="userImage1"
+                />
+              </div>
             </div>
 
             <p className="text-sm text-slate-500">

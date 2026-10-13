@@ -1,6 +1,10 @@
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const CTA = () => {
+  const {user } = useAuth()
+  const navigate=useNavigate()
   return (
     <section id="about" className="bg-white py-24">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
@@ -26,7 +30,9 @@ const CTA = () => {
               toward your financial goals with FinMate.
             </p>
 
-            <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-green-700 transition hover:bg-green-50">
+            <button
+            onClick={()=>user?navigate('/dashboard'):navigate('/signup')}
+             className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-green-700 transition hover:bg-green-50">
               Get Started Free
               <ArrowRight size={17} />
             </button>
