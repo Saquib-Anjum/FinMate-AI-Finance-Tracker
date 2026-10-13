@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
+import OAuthButtons from "./OAuthButtons";
 
 const inputClasses =
   "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition focus:border-green-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-green-600/10";
@@ -127,6 +128,7 @@ function SignupForm() {
           Log in
         </Link>
       </p>
+      <OAuthButtons/>
     </>
   );
 }

@@ -42,7 +42,7 @@ const profileSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const profileModel = mongoose.model("Profile", profileSchema);

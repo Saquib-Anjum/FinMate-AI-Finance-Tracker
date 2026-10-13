@@ -104,9 +104,13 @@ const getMe = async (req, res) => {
         message: "User not found",
       });
     }
+    delete user.password
     res.json({
       success: true,
-      user,
+      user:{
+        name:user.name,
+        email:user.email
+      }
     });
   } catch (err) {
     res.status(500).json({

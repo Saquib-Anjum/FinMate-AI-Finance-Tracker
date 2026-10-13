@@ -6,7 +6,7 @@ import api from "../api/axios";
 import GoalCard from "../components/goals/GoalCard";
 import GoalModal from "../components/goals/GoalModal";
 import AddMoneyModal from "../components/goals/AddMoneyModal";
-
+import Loading from  '../components/Loading'
 function Goals() {
   const [goals, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -104,9 +104,7 @@ function Goals() {
 
       {/* Goals Grid */}
       {loading ? (
-        <div className="flex min-h-48 items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-        </div>
+        <Loading/>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {goals.map((goal) => (

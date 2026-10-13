@@ -13,11 +13,13 @@ import AI_assistant from "./pages/AI_assistant.jsx";
 import Profile from "./pages/Profile.jsx";
 import Home from './pages/Home.jsx'
 import Login from "./pages/Login.jsx";
+import AuthCallback from "./pages/AuthCallback";
 function App() {
   return (
     <>
       <Toaster />
       <Routes>
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/signup" element={<Signup />} />
          <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home/>}/>

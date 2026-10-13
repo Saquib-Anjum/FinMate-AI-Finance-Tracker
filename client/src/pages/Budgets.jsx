@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import api from "../api/axios";
 import BudgetCard from "../components/budgets/BudgetCard";
 import BudgetModal from "../components/budgets/BudgetModal";
-
+import Loading from '../components/Loading'
 function Budgets() {
   const [budgets, setBudgets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,9 +108,7 @@ function Budgets() {
 
       {/* Budget Cards */}
       {loading ? (
-        <div className="flex min-h-48 items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-600 border-t-transparent" />
-        </div>
+        <Loading/>
       ) : budgets.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-slate-200 bg-white py-16 text-center">
           <Wallet className="mx-auto h-9 w-9 text-slate-300" />
