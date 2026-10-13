@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Bot, Send, Sparkles, UserRound } from "lucide-react";
 import api from "../../api/axios";
-
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 const initialMessages = [
   {
     id: 1,
@@ -155,7 +156,9 @@ function ChatPanel({ onLoadingChange }) {
                       : "rounded-tl-md bg-slate-50 text-left text-slate-700"
                   }`}
                 >
-                  {message.content}
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {message.content}
+                  </ReactMarkdown>
                 </div>
               </div>
             </div>
