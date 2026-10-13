@@ -47,27 +47,30 @@ const Hero = () => {
           </div>
 
           {/* Trust */}
+
           <div className="mt-8 flex items-center gap-4">
-            <div className="flex -space-x-2">
-              <div className=" flex items-center justify-center">
+            <div className="flex -space-x-3">
+              <div className="h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-slate-200">
                 <img
-                  className="w-7.5 rounded-full border-3 border-white -translate-x-4"
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50&h=50&auto=format&fit=crop"
-                  alt="userImage3"
+                  className="h-full w-full object-cover"
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&h=100&auto=format&fit=crop"
+                  alt="User 3"
                 />
               </div>
-              <div className="flex items-center justify-center">
+
+              <div className="h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-slate-300">
                 <img
-                  className="w-7.5 rounded-full border-3 border-white -translate-x-2"
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=50"
-                  alt="userImage2"
+                  className="h-full w-full object-cover"
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&h=100&auto=format&fit=crop"
+                  alt="User 2"
                 />
               </div>
-              <div className=" flex items-center justify-center">
+
+              <div className="h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-slate-400">
                 <img
-                  className="w-7.5 rounded-full border-3 border-white"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=50"
-                  alt="userImage1"
+                  className="h-full w-full object-cover"
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop"
+                  alt="User 1"
                 />
               </div>
             </div>
