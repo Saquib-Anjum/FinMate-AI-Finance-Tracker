@@ -1,39 +1,58 @@
 import passport from "passport";
+import axios from "axios";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import userModel from "../models/userModel.js";
+import profileModel from "../models/ProfileModel.js";
 
 const findOrCreateUser = async ({
   provider,
   providerId,
   email,
   name,
+  avatar,
 }) => {
   const providerField = provider === "google" ? "googleId" : "githubId";
+  const normalizedEmail = email?.toLowerCase();
+
+  if (!normalizedEmail) {
+    throw new Error("A verified email is required");
+  }
 
   let user = await userModel.findOne({
     [providerField]: providerId,
   });
 
-  if (user) return user;
+  if (!user) {
+    user = await userModel.findOne({ email: normalizedEmail });
 
-  if (!email) {
-    throw new Error("A verified email is required");
+    if (user) {
+      // Link the provider to an existing account.
+      user[providerField] = providerId;
+      await user.save();
+    } else {
+      user = await userModel.create({
+        name: name || normalizedEmail.split("@")[0],
+        email: normalizedEmail,
+        [providerField]: providerId,
+      });
+    }
   }
 
-  user = await userModel.findOne({ email: email.toLowerCase() });
+  await profileModel.findOneAndUpdate(
+    { userId: user._id },
+    {
+      $setOnInsert: { userId: user._id },
+      ...(avatar ? { $set: { avatar } } : {}),
+    },
+    {
+      upsert: true,
+      new: true,
+      runValidators: true,
+    },
+  );
 
-  if (user) {
-    user[providerField] = providerId;
-    await user.save();
-    return user;
-  }
-
-  return userModel.create({
-    name: name || email.split("@")[0],
-    email: email.toLowerCase(),
-    [providerField]: providerId,
-  });
+  return user;
 };
 
 // Google OAuth
@@ -47,10 +66,13 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         const emailData = profile.emails?.find(
-          (item) => item.verified === true || item.verified === undefined
+          (item) => item.value,
         );
 
-        if (!emailData?.value || profile._json?.email_verified !== true) {
+        if (
+          !emailData?.value ||
+          profile._json?.email_verified !== true
+        ) {
           return done(null, false, {
             message: "A verified Google email is required",
           });
@@ -61,14 +83,15 @@ passport.use(
           providerId: profile.id,
           email: emailData.value,
           name: profile.displayName,
+          avatar: profile.photos?.[0]?.value || "",
         });
 
         return done(null, user);
       } catch (error) {
         return done(error);
       }
-    }
-  )
+    },
+  ),
 );
 
 // GitHub OAuth
@@ -82,29 +105,40 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const emailData = profile.emails?.find(
-          (item) => item.verified === true && item.value
+        const { data: emails } = await axios.get(
+          "https://api.github.com/user/emails",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              Accept: "application/vnd.github+json",
+            },
+          },
         );
 
-        if (!emailData?.value) {
+        const emailData = emails.find(
+          (item) => item.verified && item.primary && item.email,
+        );
+
+        if (!emailData) {
           return done(null, false, {
-            message: "A verified GitHub email is required",
+            message: "A verified primary GitHub email is required",
           });
         }
 
         const user = await findOrCreateUser({
           provider: "github",
           providerId: String(profile.id),
-          email: emailData.value,
+          email: emailData.email,
           name: profile.displayName || profile.username,
+          avatar: profile.photos?.[0]?.value || "",
         });
 
         return done(null, user);
       } catch (error) {
         return done(error);
       }
-    }
-  )
+    },
+  ),
 );
 
 export default passport;
