@@ -39,13 +39,7 @@ const Settings = ({ onAccountDeleted }) => {
       <div className="mx-auto max-w-5xl">
         {/* Page Header */}
         <div className="mb-8">
-          <div className="mb-3 flex items-center gap-2 text-sm text-slate-500">
-            <Settings2 size={16} />
-            <span>FinMate</span>
-            <ChevronRight size={15} />
-            <span className="text-slate-800">Settings</span>
-          </div>
-
+          
           <div className="flex items-center gap-4">
             <div className="rounded-2xl bg-indigo-600 p-3 text-white shadow-lg shadow-indigo-600/20">
               <Settings2 size={27} />
