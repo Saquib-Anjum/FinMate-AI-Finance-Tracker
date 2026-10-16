@@ -5,6 +5,7 @@
 **Track your money. Understand your spending. Chat with your finances.**
 
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FinMate-2ea44f?style=for-the-badge)](https://finmate-jade.vercel.app/)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Groq](https://img.shields.io/badge/AI-Groq-F55036?style=for-the-badge)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Aggregation-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
@@ -17,7 +18,7 @@
 
 FinMate is a full-stack personal finance tracker that lets you record income and expenses, visualize spending habits, and chat with an AI assistant powered by the **Groq SDK**. The assistant uses **function calling** to run **MongoDB aggregation pipelines** on your transactions, so its answers come from your real data.
 
-🔗 **Live Backend:** https://fin-mate-ai-finance-tracker.vercel.app/
+/
 
 <!-- 📸 Add a banner or demo GIF here -->
 <!-- ![FinMate Banner](./assets/banner.png) -->
